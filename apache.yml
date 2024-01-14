@@ -8,6 +8,7 @@
         yum:
           name: epel-release
           state: latest
+        when: ansible_distribution == "Ubuntu"
 
       - name: Installing the apache2 software
         yum:
