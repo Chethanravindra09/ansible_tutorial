@@ -1,0 +1,26 @@
+---
+  - name: Install apache
+    hosts: all
+    become: true
+    become_user: root
+    tasks:
+      - name: update epel repo
+        yum:
+          name: epel-release
+          state: latest
+
+      - name: Installing the apache2 software
+        yum:
+          name: httpd
+          state: present
+          update_cache: true
+        notify:
+          - start service
+
+            
+    handlers:
+      - name: start service
+        service:
+          name: httpd
+          enabled: true
+          state: started
